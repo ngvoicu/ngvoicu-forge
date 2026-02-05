@@ -515,13 +515,36 @@ Start implementation of the active spec. This action bridges planning and execut
 5. Create TodoWrite tasks for all remaining steps in the current phase
 6. Begin implementing the first unchecked step
 
+---
+
+### CRITICAL: Step Completion Protocol
+
+**After completing EVERY step, you MUST:**
+
+1. **Edit the spec file** to mark the step as done:
+   - Change `- [ ] X.Y. Step title` to `- [x] X.Y. Step title`
+
+2. **Update frontmatter** in the spec file:
+   - `updated: <current ISO date>`
+   - If all steps in current phase are done: increment `current_phase`
+   - If all phases are done: set `status: complete`
+
+3. **Announce completion** to the user:
+   - "✓ Step X.Y complete. Moving to X.Z..."
+   - Or at phase boundary: "✓ Phase X complete. [acceptance criteria passed]"
+
+**DO NOT proceed to the next step until the current step is marked done in the file.**
+
+---
+
 **Within a phase:**
-1. Re-read the step details, its edge case references, and **Verify** criteria
+1. Read the step details, edge case references, and **Verify** criteria
 2. Implement following the **How** guidance and patterns from research
-3. Handle the edge cases referenced by this step
-4. Run the **Verify** check — fix before moving on
-5. Mark as done: `- [ ]` → `- [x]`, update `current_phase` and `updated`
-6. If interrupted or asked to switch, save progress first
+3. Handle the referenced edge cases
+4. Run the **Verify** check — fix issues before marking done
+5. **Follow the Step Completion Protocol above** — mark step done, update frontmatter, announce
+
+If interrupted or asked to switch, complete the current step first or explicitly note where you stopped.
 
 **At phase boundary:**
 1. When all steps in a phase are checked off, run the **Phase acceptance** check
@@ -531,6 +554,13 @@ Start implementation of the active spec. This action bridges planning and execut
    - Stop here for now?
 3. Update `current_phase` in frontmatter
 4. If this was the last phase, set `status: complete`
+
+**Phase completion checklist:**
+- [ ] All steps in phase show `- [x]`
+- [ ] Phase acceptance criteria verified
+- [ ] `current_phase` incremented in frontmatter
+- [ ] `updated` timestamp refreshed
+- [ ] User notified of phase completion
 
 The user can stop after any phase. They can `/specsmith-switch` to work on something else and come back later. The phase structure ensures there's always a clean stopping point.
 
