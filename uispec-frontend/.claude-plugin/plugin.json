@@ -1,0 +1,8 @@
+{
+  "name": "uispec-frontend",
+  "description": "Frontend plugin for consuming UI specifications. Reads specs to guide component development and API integration.",
+  "version": "1.0.0",
+  "author": {
+    "name": "Gabriel Voicu"
+  }
+}

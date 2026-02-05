@@ -6,7 +6,7 @@ Claude Code plugins for spec-driven development and UI specification workflows.
 
 ```bash
 # Add the marketplace
-/plugin marketplace add gabriel/ngvoicu-forge
+/plugin marketplace add https://github.com/ngvoicu/ngvoicu-forge.git
 
 # Install what you need
 /plugin install specsmith@ngvoicu-forge
