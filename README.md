@@ -1,4 +1,4 @@
-# ngvoicu-forge
+# ngvoicu-forge-claude-code
 
 Claude Code plugins for spec-driven development and UI specification workflows.
 
@@ -6,11 +6,11 @@ Claude Code plugins for spec-driven development and UI specification workflows.
 
 ```bash
 # Add the marketplace
-/plugin marketplace add https://github.com/ngvoicu/ngvoicu-forge.git
+/plugin marketplace add https://github.com/ngvoicu/ngvoicu-forge-claude-code.git
 
 # Install what you need
-/plugin install specsmith@ngvoicu-forge
-/plugin install uispec@ngvoicu-forge
+/plugin install specsmith@ngvoicu-forge-claude-code
+/plugin install uispec@ngvoicu-forge-claude-code
 ```
 
 ## Plugins
