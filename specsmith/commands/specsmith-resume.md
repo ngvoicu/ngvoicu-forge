@@ -1,6 +1,6 @@
 ---
 description: "Resume the active spec from where you left off. Usage: /specsmith-resume"
-allowed-tools: Read, Glob, Grep, TodoWrite
+allowed-tools: Read, Edit, Glob, Grep, TodoRead, TodoWrite, Task
 ---
 
 # Specsmith Resume

@@ -7,7 +7,7 @@
     {
       "name": "specsmith",
       "source": "./specsmith",
-      "description": "Create and manage thorough implementation specs with discovery interviews, deep research, and phased execution. Use /specsmith new, /specsmith switch, /specsmith resume to juggle parallel work streams."
+      "description": "Create and manage thorough implementation specs with discovery interviews, deep research, and phased execution. Commands: /specsmith-new, /specsmith-implement, /specsmith-resume, /specsmith-switch, /specsmith-edit, /specsmith-status, /specsmith-list, /specsmith-show, /specsmith-archive, /specsmith-unarchive, /specsmith-drop."
     },
     {
       "name": "uispec-backend",
@@ -17,7 +17,22 @@
     {
       "name": "uispec-frontend",
       "source": "./uispec-frontend",
-      "description": "Frontend plugin for consuming UI specifications. Reads specs to guide component development and API integration."
+      "description": "Frontend plugin for consuming UI specifications. Reads specs from uispec/ to guide component development, enforce API contracts, and maintain design system consistency. Triggers on: 'check uispec', 'what does the spec say', 'build page for', or automatically before any API-connected UI work."
+    },
+    {
+      "name": "runebook",
+      "source": "./runebook",
+      "description": "Living documentation for how your application works. Maintains structured docs for endpoints, jobs, flows, services, and integrations — always in sync with code. Commands: /runebook-init, /runebook-update, /runebook-validate, /runebook-show, /runebook-status."
+    },
+    {
+      "name": "grimoire",
+      "source": "./grimoire",
+      "description": "Research suite with 6 specialized agents for documentation lookup, best practices, codebase analysis, git history, DB schema analysis, and API contract review. Command: /grimoire."
+    },
+    {
+      "name": "chisel",
+      "source": "./chisel",
+      "description": "Fast surgical code editor for renaming files/variables/classes, moving files, find-and-replace, and small targeted edits across any language. Automatically updates all references and imports. Command: /chisel."
     }
   ]
 }

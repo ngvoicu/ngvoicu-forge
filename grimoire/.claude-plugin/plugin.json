@@ -1,0 +1,8 @@
+{
+  "name": "grimoire",
+  "description": "Research suite with 6 specialized agents for documentation lookup, best practices, codebase analysis, git history, DB schema analysis, and API contract review. Command: /grimoire.",
+  "version": "1.0.0",
+  "author": {
+    "name": "Gabriel Voicu"
+  }
+}

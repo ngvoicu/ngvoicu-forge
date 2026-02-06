@@ -120,6 +120,29 @@ Only proceed to Phase 2 when:
 
 Now that requirements are understood, spawn subagents to research how to build this. Adapt the number and focus of subagents based on what you learned in discovery.
 
+#### Grimoire Integration (preferred)
+
+**Check if the grimoire plugin is installed** by looking for grimoire skills/agents (e.g., check if `grimoire/agents/` or the `grimoire:grimoire-research` skill exists).
+
+**If grimoire is available**, use the `grimoire:grimoire-research` skill with action: **research**. Pass the discovery findings (from `.specsmiths/<n>.questions.md`) as the research context. Grimoire provides 6 specialized agents that map directly to the research streams below:
+
+| Specsmith Stream | Grimoire Agent |
+|------------------|----------------|
+| Codebase Analysis | grimoire-codebase |
+| Library Docs & Dependencies | grimoire-docs |
+| Best Practices & Pitfalls | grimoire-practices |
+| History & Existing Issues | grimoire-history |
+| Database Schema Analysis | grimoire-schema |
+| API Contract Review | grimoire-contracts |
+
+Grimoire handles agent selection, parallel execution, and synthesis automatically. Its output goes directly to `.specsmiths/<n>.research.md`.
+
+After grimoire completes, proceed to Phase 3.
+
+#### Fallback: Inline Subagents
+
+**If grimoire is NOT installed**, use the inline subagent definitions below.
+
 **Always spawn:**
 
 **Codebase Analysis** (subagent_type: explore, thoroughness: very thorough)
