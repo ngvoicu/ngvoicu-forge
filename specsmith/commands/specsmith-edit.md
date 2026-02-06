@@ -5,6 +5,8 @@ allowed-tools: Read, Edit, Write, Bash, Glob, Grep, LS, TodoRead, TodoWrite, Tas
 
 # Specsmith Edit
 
+**Do NOT use EnterPlanMode.** Specsmith IS the planning process.
+
 Edit an existing spec with name: `{{ARGS}}`
 
 Invoke the specsmith:specsmith-implementation skill, action: **edit**

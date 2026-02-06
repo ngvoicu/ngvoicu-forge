@@ -5,6 +5,8 @@ allowed-tools: Read, Edit, Write, Bash, Glob, Grep, LS, TodoRead, TodoWrite, Tas
 
 # Specsmith Implement
 
+**Do NOT use EnterPlanMode.** Specsmith IS the planning process.
+
 Start implementation of the active spec.
 
 Invoke the specsmith:specsmith-implementation skill, action: **implement**

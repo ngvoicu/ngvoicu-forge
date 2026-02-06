@@ -33,57 +33,55 @@ Before executing any action, check for and handle these edge cases:
 
 Create a new implementation spec. This is a multi-phase process that prioritizes understanding the problem deeply before proposing any solution.
 
-### Phase 1: Discovery Interview
+### Phase 1: Discovery
 
 **Do NOT research or plan anything yet.** First, deeply understand what the user wants.
 
-#### Step 1: Collect the Brief
+**Do NOT use EnterPlanMode.** Specsmith IS the planning process — it handles its own discovery, research, and spec creation. Using plan mode on top of specsmith is redundant.
 
-Before asking any questions, invite the user to describe what they want to build in their own words. Say something like:
+#### Step 1: Get the User's Explanation
 
-"Before I start asking questions, tell me everything you already know about this. What should it do? What's the context? Any constraints or ideas? Write as much or as little as you want — I'll ask follow-up questions after."
+Ask the user to explain the feature they want to implement. Keep it simple:
 
-Wait for the user's response. This is their **brief** — it may be a single sentence or multiple paragraphs. Accept whatever they provide without interrupting.
+"Explain the feature you want to implement."
 
-Log the brief to `.specsmiths/<n>.questions.md` under a `## Brief` section at the top (before Round 1).
+Wait for their response. This is their **brief** — it may be a single sentence or multiple paragraphs. Accept whatever they provide without interrupting.
 
-#### Step 2: Targeted Interview
+Log the brief to `.specsmiths/<n>.questions.md` under a `## Brief` section.
 
-Now ask follow-up questions **informed by the brief**. Don't re-ask things the user already covered — instead, dig deeper into gaps, ambiguities, and unstated assumptions from their description. Ask 3-5 focused questions per round. Keep going until there is enough clarity to spec this properly. Cover these dimensions:
+#### Step 2: Think, Then Clarify If Needed
 
-**Functional requirements:**
-- What exactly should this do? Walk me through the user/system flow.
-- What are the inputs and outputs?
-- What triggers this? Who/what initiates it?
-- What should happen when it succeeds? What does "done" look like?
+After receiving the brief, **think carefully** about what the user described. Analyze it against these dimensions:
 
-**Edge cases & failure modes:**
-- What happens when [input is missing / malformed / enormous]?
-- What if this runs concurrently? Race conditions?
-- What if the upstream service is down / slow / returns garbage?
-- What about partial failures — half the batch succeeds, half fails?
-- What if the user does [unexpected thing]? Retries? Double-submits?
-- What about empty states, first-time use, migration from old behavior?
+- **Functional requirements:** Is the flow clear? Inputs/outputs? Triggers? What "done" looks like?
+- **Edge cases & failure modes:** Missing/malformed input? Concurrency? Upstream failures? Partial failures? Retries?
+- **Constraints & boundaries:** What's out of scope? Performance? Auth? Greenfield vs existing data? Compliance?
+- **Integration & dependencies:** What systems does this touch? APIs? Database changes? Other teams?
+- **User experience (if applicable):** Error messages? Loading states? Accessibility?
 
-**Constraints & boundaries:**
-- What is explicitly NOT part of this? What should we leave alone?
-- Are there performance requirements? Latency budgets? Size limits?
-- Authentication/authorization — who can do this? Role-based?
-- Does this need to work with existing data or is it greenfield?
-- Any regulatory or compliance considerations?
+If the brief already covers enough to spec this — **don't ask unnecessary questions, just proceed to Phase 2.**
 
-**Integration & dependencies:**
-- What existing systems does this touch?
-- Are there APIs we need to call or expose?
-- Database changes? New tables? Migrations?
-- Does this affect other teams or services?
+If there are genuine gaps, ambiguities, or unstated assumptions, ask 3-5 focused follow-up questions. Don't re-ask things the user already covered. Be like a technical architect — only ask what you actually need to know.
 
-**User experience (if applicable):**
-- Error messages — what should users see when things fail?
-- Loading states, optimistic updates, offline behavior?
-- Accessibility requirements?
+After the user answers, **think again**. If more clarification is still needed, do another round. If not, move on. The goal is the minimum number of rounds needed to understand the problem, not a fixed interview process.
 
-Ask questions conversationally. Don't dump all questions at once — listen to answers, follow up on interesting threads, dig deeper where the user is vague. Be like a technical architect running a requirements session.
+Log all Q&A rounds to `.specsmiths/<n>.questions.md`.
+
+#### Question Reference
+
+Use these as a pool to draw from — only ask what's actually unclear from the brief:
+
+**Functional:** What exactly should this do? Walk me through the flow. What are the inputs/outputs? What triggers it? What does "done" look like?
+
+**Edge cases:** What happens when input is missing/malformed/enormous? Concurrent access? Upstream service down/slow? Partial failures? Double-submits? Empty states, first-time use?
+
+**Constraints:** What's explicitly NOT part of this? Performance requirements? Auth/authorization? Existing data or greenfield? Regulatory considerations?
+
+**Integration:** What existing systems does this touch? APIs to call or expose? Database changes? Other teams affected?
+
+**UX:** Error messages for users? Loading states? Accessibility?
+
+#### Logging Format
 
 Log everything to `.specsmiths/<n>.questions.md`:
 
@@ -91,13 +89,13 @@ Log everything to `.specsmiths/<n>.questions.md`:
 # Discovery: <n>
 
 ## Brief
-<user's initial description — pasted verbatim>
+<user's explanation — pasted verbatim>
 
 ## Round 1
-**Q:** <follow-up question based on the brief>
+**Q:** <question addressing a gap in the brief>
 **A:** <user's answer>
 
-**Q:** <follow-up question based on the brief>
+**Q:** <question addressing a gap in the brief>
 **A:** <user's answer>
 
 ## Round 2
@@ -111,23 +109,27 @@ Log everything to `.specsmiths/<n>.questions.md`:
 - <Anything still unresolved>
 ```
 
+Note: Round sections are only added if clarification was needed. If the brief was comprehensive enough, the log may only contain the Brief and Decisions sections.
+
 #### Discovery "Done" Criteria
 
-Signal to the user that discovery is likely complete when:
+You have enough to proceed when:
 - [ ] You can describe the full happy path in 3-5 sentences
 - [ ] You know what "done" looks like (acceptance criteria)
 - [ ] You've identified 5+ edge cases or error scenarios
 - [ ] You know what's explicitly out of scope
 - [ ] Integration points and dependencies are mapped
 
-Ask: "I think I have enough to spec this. Anything else I should know before I research?"
+If these are met after reading the brief alone, tell the user: "Your brief covers everything I need. Moving to research." and proceed directly to Phase 2.
+
+If interview rounds were needed, ask: "I think I have enough to spec this. Anything else I should know before I research?"
 
 Only proceed to Phase 2 when:
 - The above criteria are met
 - Core flow is clear
 - Major edge cases are identified
 - Boundaries are defined
-- The user confirms they're ready to move to research
+- The user confirms they're ready (or brief was sufficient)
 
 ---
 

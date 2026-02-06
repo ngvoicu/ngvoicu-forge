@@ -141,6 +141,7 @@ Frontend-owned (read-only for backend): `design-system.md`, `components.md`, UI 
 ## Critical Rules
 
 ### Specsmith
+- **Never use plan mode (EnterPlanMode) for specsmith commands** — specsmith IS the planning process. It handles its own discovery, research, and spec creation. If plan mode is active when a `/specsmith-*` command is invoked, exit plan mode first before executing the command.
 - Discovery and research phases are **mandatory** — never skip them
 - Specs are the **source of truth** — never rely on conversation memory
 - Always **re-read spec + research + questions on resume** to restore full context

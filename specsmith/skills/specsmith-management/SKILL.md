@@ -5,6 +5,8 @@ description: "Awareness of the .specsmiths/ directory for multi-spec workflows. 
 
 # Plan Management Awareness
 
+**Do NOT use EnterPlanMode when specsmith is active.** Specsmith IS the planning process — it handles discovery, research, and spec creation. Using plan mode on top of specsmith is redundant and disruptive.
+
 ## Trigger Phrases
 
 Activate this skill when the user says anything matching these patterns:

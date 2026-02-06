@@ -5,6 +5,8 @@ allowed-tools: Read, Edit, Glob, Grep, TodoRead, TodoWrite, Task
 
 # Specsmith Resume
 
+**Do NOT use EnterPlanMode.** Specsmith IS the planning process.
+
 Resume work on the active spec.
 
 Invoke the specsmith:specsmith-implementation skill, action: **resume**
