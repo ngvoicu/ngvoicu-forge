@@ -1,6 +1,6 @@
 ---
 name: runebook-awareness
-description: "Assertive awareness of the .runebook/ directory for living documentation. Triggers on: 'how does X work', 'what does this endpoint do', 'what does this service do', 'what does this job do', 'what does this integration do', 'check the runebook', 'document this', 'update the docs', or when a .runebook/ directory exists and code changes are made. Automatically reads relevant entries before work and updates them after changes — no prompting."
+description: "Assertive awareness of the .runebook/ directory for living documentation. Triggers on: 'how does X work', 'what does this endpoint do', 'what does this service do', 'what does this job do', 'what does this integration do', 'what does this page do', 'what props does X accept', 'what does this hook do', 'check the runebook', 'document this', 'update the docs', or when a .runebook/ directory exists and code changes are made. Automatically reads relevant entries before work and updates them after changes — no prompting."
 ---
 
 # Runebook Awareness
@@ -14,6 +14,9 @@ Activate this skill when the user says anything matching these patterns:
 - "what does this endpoint do", "what does this service do"
 - "what does this job do", "how does the X job work"
 - "what does this integration do", "how does the X integration work"
+- "what does this page do", "how does the X page work", "what does this route render"
+- "what props does X accept", "how does the X component work", "what variants does X have"
+- "what does this hook do", "how does the X hook work", "what does useX return"
 - "explain the flow for X", "how does the X flow work"
 - "what calls X", "what depends on X"
 - "check the runebook", "look it up in the runebook"
@@ -34,8 +37,12 @@ Activate this skill when the user says anything matching these patterns:
 When `.runebook/` exists and you're about to implement, modify, or debug code:
 
 1. **Identify affected components**
-   - From the user's request, determine which endpoints, services, jobs, or integrations will be touched
+   - From the user's request, determine which endpoints, services, jobs, integrations, pages, components, or hooks will be touched
    - Map file paths to runebook entries via `source_files` frontmatter
+   - Use path-based heuristics when `source_files` match is ambiguous:
+     - `app/**/page.*`, `pages/**` (excluding `pages/api/`) → pages
+     - `components/**`, `ui/**`, `shared/**` → components
+     - `hooks/**`, `composables/**` → hooks
 
 2. **Read relevant entries automatically**
    - Read each affected entry from `.runebook/<type>/<name>.md`

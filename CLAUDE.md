@@ -22,7 +22,7 @@ Each plugin follows a **thin-command-over-thick-skill** pattern:
 
 **grimoire** — Research suite with 6 specialized agents: docs (Context7 + web fallback), best practices, codebase analysis, git history, DB schema, and API contracts. Integrates with specsmith Phase 2 for enhanced research.
 
-**runebook** — Living documentation that tracks how an application works. Maintains structured docs for endpoints, jobs, flows, services, and integrations — always in sync with code changes. State lives in `.runebook/` as plain markdown committed to git.
+**runebook** — Living documentation that tracks how an application works. Maintains structured docs for endpoints, jobs, flows, services, integrations, pages, components, and hooks — covering both backend and frontend. Always in sync with code changes. State lives in `.runebook/` as plain markdown committed to git.
 
 **chisel** — Fast surgical code editor (haiku model) for renaming, moving, replacing, and small targeted edits. Git-aware, framework-aware, language-agnostic. Automatically updates all references and imports.
 
@@ -52,7 +52,7 @@ All state is plain markdown files designed to be committed to git:
 - `.specsmiths/<name>.questions.md` — discovery Q&A log
 - `.specsmiths/active.json` — tracks active spec (`{"active": "<name>", "last_switched": "<ISO date>"}`)
 - `.runebook/index.md` — master index with links, tags, dates
-- `.runebook/<type>/<name>.md` — entry with YAML frontmatter (`type`, `updated`, `source_files`, `related`, `tags`)
+- `.runebook/<type>/<name>.md` — entry with YAML frontmatter (`type`, `updated`, `source_files`, `related`, `tags`). Types: `endpoints/`, `jobs/`, `flows/`, `services/`, `integrations/`, `pages/`, `components/`, `hooks/`
 
 ### Grimoire Agent Streams
 

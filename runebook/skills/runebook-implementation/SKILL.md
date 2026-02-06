@@ -22,7 +22,13 @@ All state lives in `.runebook/` at the project root. Entries are organized by ty
 │   └── <name>.md
 ├── services/
 │   └── <name>.md
-└── integrations/
+├── integrations/
+│   └── <name>.md
+├── pages/
+│   └── <name>.md
+├── components/
+│   └── <name>.md
+└── hooks/
     └── <name>.md
 ```
 
@@ -59,7 +65,10 @@ Initialize the runebook by scanning the codebase and generating documentation en
      ├── jobs/
      ├── flows/
      ├── services/
-     └── integrations/
+     ├── integrations/
+     ├── pages/
+     ├── components/
+     └── hooks/
      ```
 
 2. **Invoke the `runebook-scanner` agent** for a thorough codebase scan
@@ -112,6 +121,24 @@ Initialize the runebook by scanning the codebase and generating documentation en
    | Name | Provider | Tags | Updated |
    |------|----------|------|---------|
    | [<name>](integrations/<name>.md) | Stripe | payments | 2025-01-15 |
+
+   ## Pages
+
+   | Name | Route | Rendering | Tags | Updated |
+   |------|-------|-----------|------|---------|
+   | [<name>](pages/<name>.md) | /users/:id | SSR | auth, users | 2025-01-15 |
+
+   ## Components
+
+   | Name | Category | Props | Tags | Updated |
+   |------|----------|-------|------|---------|
+   | [<name>](components/<name>.md) | form | 5 | forms, input | 2025-01-15 |
+
+   ## Hooks
+
+   | Name | Returns | Tags | Updated |
+   |------|---------|------|---------|
+   | [<name>](hooks/<name>.md) | { user, loading, error } | auth, state | 2025-01-15 |
    ```
 
 5. **Ask about flows**
@@ -125,6 +152,9 @@ Initialize the runebook by scanning the codebase and generating documentation en
    - Jobs: 3 created
    - Services: 8 created
    - Integrations: 4 created
+   - Pages: 6 created
+   - Components: 10 created
+   - Hooks: 4 created
    - Flows: 0 (awaiting your input)
    - Skipped: 2 (already existed)
    - TODOs: 3 entries need human context (marked with TODO)
@@ -302,8 +332,11 @@ Runebook Status
   Flows                   2        0          2 (manual)
   Services                8        1        8/9 (89%)
   Integrations            4        0        4/4 (100%)
+  Pages                   6        0        6/6 (100%)
+  Components             10        1       10/12 (83%)
+  Hooks                   4        0        4/4 (100%)
   ─────────────────────────────────────────────────
-  Total                  29        3       29/32 (91%)
+  Total                  49        4       49/54 (91%)
 
 Recently Updated:
   endpoints/create-user          2025-01-20    auth, users
@@ -676,6 +709,243 @@ tags:
 |-----------|---------------|-----------|
 | userId | customer_id | none |
 | amount | amount | cents → dollars |
+
+## Changelog
+
+### <ISO date>
+- Initial documentation from codebase scan
+```
+
+### Page Template
+
+```markdown
+---
+type: page
+route: "<route pattern>"
+rendering: <SSR|SSG|ISR|CSR>
+updated: <ISO date>
+source_files:
+  - <file path>
+related:
+  - components/<name>
+  - hooks/<name>
+tags:
+  - <tag>
+---
+
+# <Page Name>
+
+## Summary
+
+<One-paragraph description of what this page/screen displays and its purpose in the app.>
+
+## Route
+
+- **Path:** <route pattern with params, e.g. /users/:id>
+- **Params:** <route parameters and their meaning>
+- **Query params:** <optional query parameters>
+- **Layout:** <layout component wrapping this page>
+- **Auth required:** <yes/no — redirect or gate behavior>
+
+## Rendering Strategy
+
+- **Method:** <SSR / SSG / ISR / CSR>
+- **Revalidation:** <ISR interval or on-demand trigger, if applicable>
+- **Fallback:** <blocking / true / false, for SSG>
+
+## Data Fetching
+
+### Server-Side
+
+- <Data loaded on the server — getServerSideProps, loader, server component fetch>
+- **Source:** <API endpoint, database query, service call>
+- **Error handling:** <what happens when data fetch fails>
+
+### Client-Side
+
+- <Data loaded after mount — useEffect, useSWR, React Query>
+- **Source:** <API endpoint called>
+- **Loading state:** <how loading is displayed>
+- **Error state:** <how errors are displayed>
+
+## SEO & Meta
+
+- **Title:** <page title pattern>
+- **Description:** <meta description>
+- **OG tags:** <Open Graph metadata if applicable>
+
+## Components Used
+
+- <List of key components rendered on this page>
+
+## Loading & Error States
+
+- **Loading:** <skeleton, spinner, suspense boundary>
+- **Error:** <error boundary, fallback UI>
+- **Empty state:** <what shows when data is empty>
+
+## Accessibility
+
+- <Landmark roles, focus management, keyboard navigation>
+
+## Dependencies
+
+- **Components:** <shared components used>
+- **Hooks:** <custom hooks called>
+- **Services:** <API services / data fetching utilities>
+
+## Changelog
+
+### <ISO date>
+- Initial documentation from codebase scan
+```
+
+### Component Template
+
+```markdown
+---
+type: component
+category: <form|layout|navigation|display|feedback|data>
+updated: <ISO date>
+source_files:
+  - <file path>
+related:
+  - components/<name>
+  - hooks/<name>
+tags:
+  - <tag>
+---
+
+# <Component Name>
+
+## Summary
+
+<One-paragraph description of what this component renders and when to use it.>
+
+## Props
+
+| Name | Type | Required | Default | Description |
+|------|------|----------|---------|-------------|
+| ... | ... | ... | ... | ... |
+
+## Variants
+
+- <Named variants, sizes, or modes the component supports>
+
+## States
+
+- **Default:** <how it looks normally>
+- **Loading:** <loading appearance if applicable>
+- **Disabled:** <disabled appearance>
+- **Error:** <error appearance>
+- **Empty:** <empty state if applicable>
+
+## Usage Examples
+
+\`\`\`tsx
+<ComponentName prop="value" />
+\`\`\`
+
+## Composition
+
+- **Children:** <what it accepts as children>
+- **Slots:** <named slots or render props>
+- **Compound components:** <sub-components like Tabs.Panel>
+
+## Styling
+
+- **Approach:** <CSS modules / Tailwind / styled-components / etc.>
+- **Customization:** <className prop, style overrides, CSS variables>
+- **Responsive:** <breakpoint behavior>
+
+## Accessibility
+
+- **Role:** <ARIA role>
+- **Keyboard:** <keyboard interactions supported>
+- **Screen reader:** <announcements, labels>
+
+## Dependencies
+
+- **Components:** <child components used>
+- **Hooks:** <custom hooks called>
+- **Libraries:** <external UI library dependencies>
+
+## Changelog
+
+### <ISO date>
+- Initial documentation from codebase scan
+```
+
+### Hook Template
+
+```markdown
+---
+type: hook
+updated: <ISO date>
+source_files:
+  - <file path>
+related:
+  - hooks/<name>
+  - services/<name>
+tags:
+  - <tag>
+---
+
+# <Hook Name>
+
+## Summary
+
+<One-paragraph description of what this hook does and when to use it.>
+
+## Signature
+
+\`\`\`ts
+function useHookName(params): ReturnType
+\`\`\`
+
+## Parameters
+
+| Name | Type | Required | Default | Description |
+|------|------|----------|---------|-------------|
+| ... | ... | ... | ... | ... |
+
+## Return Value
+
+| Name | Type | Description |
+|------|------|-------------|
+| ... | ... | ... |
+
+## Usage Example
+
+\`\`\`tsx
+function MyComponent() {
+  const { data, loading } = useHookName(params);
+  // ...
+}
+\`\`\`
+
+## Internal Logic
+
+<Key algorithms, state machine, caching strategy — the "how" that isn't obvious from the interface.>
+
+## Side Effects
+
+- <API calls, subscriptions, DOM mutations, timers>
+
+## Cleanup
+
+- <What happens on unmount — unsubscribe, cancel requests, clear timers>
+
+## Dependencies
+
+- **Hooks:** <other custom hooks called>
+- **Services:** <API services or utilities used>
+- **Context:** <React contexts consumed>
+
+## Rules & Constraints
+
+- <Conditions on where/how this hook can be used — e.g., must be inside a Provider>
+- <Known limitations or gotchas>
 
 ## Changelog
 

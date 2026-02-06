@@ -11,6 +11,9 @@ Living documentation lives in `.runebook/`. **ALWAYS consult before changes, ALW
 | After creating a new scheduled job | Create `.runebook/jobs/<name>.md` |
 | After creating a new service/module | Create `.runebook/services/<name>.md` |
 | After creating a new integration | Create `.runebook/integrations/<name>.md` |
+| After creating a new page/route | Create `.runebook/pages/<name>.md` |
+| After creating a new reusable component | Create `.runebook/components/<name>.md` |
+| After creating a new custom hook | Create `.runebook/hooks/<name>.md` |
 | After modifying any existing component | Update the existing entry |
 | After removing a component | Flag entry as removed (add `status: removed` to frontmatter) |
 | New business flow identified | Create `.runebook/flows/<name>.md` (ask about steps) |
@@ -54,6 +57,9 @@ For every update:
 | Services | `<service-name>.md` | `auth-service.md`, `payment-processor.md` |
 | Integrations | `<provider-name>.md` | `stripe.md`, `sendgrid.md` |
 | Flows | `<flow-name>.md` | `user-onboarding.md`, `order-checkout.md` |
+| Pages | `<route-path-slug>.md` | `users-by-id.md`, `dashboard.md` |
+| Components | `<component-name>.md` | `button.md`, `data-table.md` |
+| Hooks | `<hook-name>.md` | `use-auth.md`, `use-pagination.md` |
 
 ### First-Time Setup
 
