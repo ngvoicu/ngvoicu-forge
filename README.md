@@ -151,7 +151,7 @@ Paste these into any project's `CLAUDE.md` as a baseline. They work standalone o
 
 ### Plan Before Building
 - Think through the problem before writing code
-- For changes touching more than 2-3 files, check in with a plan before implementing
+- For non-trivial features or changes touching more than 2-3 files, use `/specsmith-new` to create a proper spec before implementing
 - Explain your approach at a high level before diving into details
 
 ### Keep It Simple
