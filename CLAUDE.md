@@ -28,7 +28,7 @@ Each plugin follows a **thin-command-over-thick-skill** pattern:
 
 **uispec-backend** — Syncs `openapi.yaml` and endpoint specs in `../{{PRJ-frontend}}/uispec/` after backend API changes. Backend-owned: `openapi.yaml`, API sections of endpoint files.
 
-**uispec-frontend** — Reads specs from `uispec/` to guide component development. Frontend-owned: `design-system.md`, `components.md`, UI Guidelines sections of endpoint files.
+**uispec-frontend** — Frontend commands for detecting spec gaps, building UI from specs, and validating UI conformance. Frontend-owned: `design-system.md`, `components.md`, UI Guidelines sections of endpoint files.
 
 ### Key Directories
 
@@ -124,11 +124,18 @@ Frontend-owned (read-only for backend): `design-system.md`, `components.md`, UI 
 /chisel edit <description>             # small targeted code change
 ```
 
-### UISpec (3 commands)
+### UISpec Backend (3 commands)
 ```
 /uispec-init      # initialize uispec/ from existing backend endpoints
 /uispec-sync      # sync after backend API changes
 /uispec-validate  # check spec consistency and coverage
+```
+
+### UISpec Frontend (3 commands)
+```
+/uispec-detect                # find gaps between specs and UI
+/uispec-implement <endpoint>  # build/update UI from endpoint spec
+/uispec-validate-ui           # validate UI follows spec (PASS/FAIL)
 ```
 
 ## Critical Rules
@@ -167,6 +174,7 @@ Frontend-owned (read-only for backend): `design-system.md`, `components.md`, UI 
 - **specsmith + runebook**: Read entries during implementation, update after each step
 - **chisel + runebook**: After rename/move, update runebook `source_files` references
 - **grimoire + chisel**: Research scope with `/grimoire codebase` before large renames
+- **specsmith + uispec**: After implementing spec steps that change API endpoints, run `/uispec-sync` to update the API contract. Specsmith reminds you at step and phase boundaries.
 - **uispec + runebook**: Keep endpoint documentation consistent across both
 
 ## Installation

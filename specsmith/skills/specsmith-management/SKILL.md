@@ -72,3 +72,8 @@ When the conversation suggests complexity but no spec exists:
 - User seems uncertain about approach or order of operations
 
 Say: "This is getting complex — want me to create a spec to track this properly? `/specsmith-new <suggested-name>`"
+
+**UISpec awareness:**
+When the user is implementing a spec and mentions uispec, API contracts,
+or UI guidelines:
+- Remind: "Run `/uispec-sync` to sync your latest API changes to UISpec."

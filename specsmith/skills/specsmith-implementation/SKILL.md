@@ -556,6 +556,13 @@ Start implementation of the active spec. This action bridges planning and execut
    - "✓ Step X.Y complete. Moving to X.Z..."
    - Or at phase boundary: "✓ Phase X complete. [acceptance criteria passed]"
 
+4. **UISpec reminder** (if the completed step created or modified an API endpoint):
+   - Check if the step's **Where:** references route/controller/handler files,
+     or the step's **What:** mentions creating/modifying an API endpoint
+   - If yes, append to the step completion announcement:
+     "💡 This step changed API endpoints. Run `/uispec-sync` to update the API contract."
+   - If the step didn't touch API endpoints, skip silently
+
 **DO NOT proceed to the next step until the current step is marked done in the file.**
 
 ---
@@ -575,8 +582,10 @@ If interrupted or asked to switch, complete the current step first or explicitly
    - Continue to next phase?
    - Switch to a different spec?
    - Stop here for now?
-3. Update `current_phase` in frontmatter
-4. If this was the last phase, set `status: complete`
+3. If any steps in this phase created or modified API endpoints, include in the phase completion summary:
+   "📋 This phase changed API endpoints. Run `/uispec-sync` to update the API contracts, then optionally write UI guidelines in the endpoint specs."
+4. Update `current_phase` in frontmatter
+5. If this was the last phase, set `status: complete`
 
 **Phase completion checklist:**
 - [ ] All steps in phase show `- [x]`

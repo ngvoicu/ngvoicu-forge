@@ -51,7 +51,9 @@ After implementing a page/component, update the endpoint's UI Guidelines section
 ### Commands
 
 ```
-/uispec-validate  # Check spec consistency and coverage
+/uispec-detect                # Find gaps between specs and UI
+/uispec-implement <endpoint>  # Build/update UI from endpoint spec
+/uispec-validate-ui           # Validate UI follows spec (PASS/FAIL)
 ```
 
 ### Integration with Other Plugins

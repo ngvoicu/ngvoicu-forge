@@ -17,7 +17,7 @@
     {
       "name": "uispec-frontend",
       "source": "./uispec-frontend",
-      "description": "Frontend plugin for consuming UI specifications. Reads specs from uispec/ to guide component development, enforce API contracts, and maintain design system consistency. Triggers on: 'check uispec', 'what does the spec say', 'build page for', or automatically before any API-connected UI work."
+      "description": "Frontend plugin for consuming UI specifications. Reads specs from uispec/ to guide component development, enforce API contracts, and maintain design system consistency. Commands: /uispec-detect, /uispec-implement, /uispec-validate-ui."
     },
     {
       "name": "runebook",
