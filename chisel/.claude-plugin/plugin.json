@@ -1,7 +1,7 @@
 {
   "name": "chisel",
   "description": "Fast surgical code editor for renaming files/variables/classes, moving files, find-and-replace, and small targeted edits across any language. Automatically updates all references and imports. Command: /chisel.",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "author": {
     "name": "Gabriel Voicu"
   }
