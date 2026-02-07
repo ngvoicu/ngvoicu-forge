@@ -12,20 +12,21 @@ This skill orchestrates the grimoire agent suite — dispatching to specialized 
 List available research streams. Display this table:
 
 ```
-Grimoire Research Streams
+Grimoire Research Suite
 
-  docs        Library documentation (Context7 + web fallback)
-  practices   Best practices, pitfalls, security considerations
-  codebase    Architecture, patterns, files affected
-  history     Git log, TODOs, ADRs, prior attempts
-  schema      DB schema, migrations, indexes
-  contracts   External API docs, rate limits, auth
+  Just describe what you need — grimoire picks the right agents automatically.
 
-Usage:
-  /grimoire docs react hooks          Single stream lookup
-  /grimoire codebase auth system      Single stream lookup
-  /grimoire research add user auth    Full parallel research
-  /grimoire add user auth             Full parallel research (implicit)
+  /grimoire add user authentication     Auto-dispatches to relevant agents
+  /grimoire how does Stripe Connect work  Auto-dispatches to relevant agents
+
+  For a quick single-stream lookup, prefix with the stream name:
+
+  /grimoire docs react hooks            Library docs only
+  /grimoire practices JWT rotation      Best practices only
+  /grimoire codebase auth system        Codebase analysis only
+  /grimoire history websocket migration Git history only
+  /grimoire schema users table          DB schema only
+  /grimoire contracts stripe API        External API docs only
 ```
 
 ---

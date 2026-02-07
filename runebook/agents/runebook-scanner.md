@@ -48,17 +48,17 @@ You are a thorough codebase analysis agent. Your job is to discover application 
    - Rails: `routes.rb`, controller actions
    - Next.js/Nuxt: `app/api/` directory, `pages/api/`
    - NestJS: `@Controller`, `@Get`, `@Post`
-3. **Find jobs**: Search for cron definitions, schedulers, queue processors:
+4. **Find jobs**: Search for cron definitions, schedulers, queue processors:
    - `node-cron`, `bull`, `agenda`, `crontab`
    - Celery tasks, Django management commands
    - Spring `@Scheduled`, Quartz
    - Sidekiq workers, ActiveJob
-4. **Find services**: Search for business logic modules — classes with multiple public methods that encapsulate domain logic. Not utilities or helpers.
-5. **Find integrations**: Search for external API clients, webhook routes, third-party SDK initialization:
+5. **Find services**: Search for business logic modules — classes with multiple public methods that encapsulate domain logic. Not utilities or helpers.
+6. **Find integrations**: Search for external API clients, webhook routes, third-party SDK initialization:
    - HTTP client calls (`axios`, `fetch`, `requests`, `HttpClient`)
    - SDK imports (Stripe, SendGrid, AWS, Twilio)
    - Webhook handler routes
-6. **Find pages**: Search for route-rendering components based on detected framework:
+7. **Find pages**: Search for route-rendering components based on detected framework:
    - Next.js App Router: `app/**/page.{tsx,ts,jsx,js}` (each `page.*` is a route)
    - Next.js Pages Router: `pages/**/*.{tsx,ts,jsx,js}` — exclude `pages/api/` (those are endpoints)
    - React Router: `createBrowserRouter`, `<Route path=`, route config arrays
@@ -67,22 +67,34 @@ You are a thorough codebase analysis agent. Your job is to discover application 
    - Remix: `app/routes/**/*.{tsx,ts}`
    - Vue/Nuxt: `pages/**/*.vue`
    - For hybrid projects (e.g. Next.js): `pages/api/**` → endpoints, other pages → pages
-7. **Find components**: Search for reusable UI components — only in shared directories to avoid noise:
+8. **Find components**: Search for reusable UI components — only in shared directories to avoid noise:
    - Look in: `components/`, `ui/`, `shared/`, `common/`, `lib/` directories
    - Also include barrel-exported components (exported from `index.{ts,tsx,js}` files)
    - Patterns: exported function components returning JSX, `@Component` decorator (Angular), `.vue` SFCs
    - **Skip**: page-local fragments, test components, storybook stories, inline components not exported
-8. **Find hooks**: Search for custom React hooks or Vue composables:
+9. **Find hooks**: Search for custom React hooks or Vue composables:
    - Exported functions named `use*` that call React hooks (useState, useEffect, useCallback, etc.)
    - Look in: `hooks/`, `composables/`, `lib/hooks/`, `utils/hooks/` directories
    - Also find hooks exported from other locations if they follow the `use*` naming convention
    - **Skip**: test hooks, hooks that are just re-exports of library hooks
-9. **Read each discovered component**: Don't just note it exists — read the source to understand:
+10. **Read each discovered component**: Don't just note it exists — read the source to understand:
    - What it does (behavior, business logic)
    - What it depends on (other services, databases, external APIs)
    - How it handles errors and edge cases
    - What it returns or produces
-10. **Identify feature domains**: As you scan, cluster components that work together on a single feature area (same tags, import each other, serve the same user flow). For each cluster of 3+ components spanning 2+ types, identify the domain name and document the narrative thread connecting them. Report these as "Guide-Worthy Domains" in your output.
+11. **Identify feature domains**: As you scan, cluster components that work together on a single feature area:
+    - Same tags (e.g. `auth`, `payments`)
+    - Import each other (e.g. endpoint calls service calls integration)
+    - Serve the same user flow (e.g. checkout: cart endpoint → payment service → stripe integration → email job)
+
+    For each cluster of 3+ components spanning 2+ types:
+    - Identify the domain name — use the feature area, not the implementation (prefer "authentication" over "jwt-strategy")
+    - List which discovered components belong
+    - Write a one-paragraph narrative thread: how these components connect to serve a user flow
+    - If two related clusters share a conceptual parent, merge them (e.g. "oauth-login" + "api-key-auth" → "authentication")
+    - Flag uncertain cases: "unsure if X and Y should be separate domains or merged"
+
+    Report as "Guide-Worthy Domains" in your output.
 
 ### Scoped Scan (update mode)
 
@@ -148,12 +160,17 @@ Return your findings as a structured report:
 ### Potential Flows (need human context)
 - <description of observed multi-component interaction>
 
+### Project Summary
+- Total entries discovered: <n> (<breakdown by type>)
+- Recommended guide approach: <"per-domain guides" if 10+ entries, "single how-it-works guide" if fewer>
+
 ### Guide-Worthy Domains
 For each cluster of 3+ components across 2+ types that work together on a feature:
 - **<domain name>** (e.g. "authentication", "payments", "onboarding")
-  - Components: <list of entries that belong to this domain>
-  - Why: <brief explanation of how these components connect — the narrative thread>
-  - Key flow: <one-sentence summary of the main path through this domain>
+  - Components: <list of entries that belong to this domain, with types>
+  - Narrative thread: <one paragraph explaining how these components connect — tell the story of a user flow through this domain>
+  - Key flow: <one-sentence summary of the main path>
+  - Uncertain merges: <flag if two sub-clusters might be separate or merged>
 
 ### Undocumented (new since last scan)
 - <components found that don't have entries>

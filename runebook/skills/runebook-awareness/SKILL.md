@@ -26,6 +26,9 @@ Activate this skill when the user says anything matching these patterns:
 - "how does authentication work", "explain the payment system", "walk me through onboarding"
 - "give me an overview of X", "I'm new to this codebase", "help me understand X"
 - "what's the architecture for X", "how do these pieces fit together"
+- "how does the signup flow work", "explain the checkout flow" — flows often map to guides
+- "system overview", "what are the main systems", "how is this structured"
+- "what breaks if I change X", "what's affected by changing X"
 - When a question is about a feature domain rather than a specific component, check `guides/` first — guides provide the narrative overview, component entries provide the details
 - If a matching guide exists, present it; if not, check if component entries can answer the question directly
 

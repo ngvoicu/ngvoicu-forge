@@ -41,7 +41,9 @@ Create a new implementation spec. This is a multi-phase process that prioritizes
 
 #### Step 1: Get the User's Explanation
 
-Ask the user to explain the feature they want to implement. Give them a nudge toward detail:
+**If a brief was already provided via one-shot** (the command included `name: brief`), skip the prompt — log the provided brief to `.specsmiths/<n>.questions.md` under a `## Brief` section and go straight to Step 1.5.
+
+**If no brief was provided** (name-only or no args), ask the user:
 
 "Explain the feature you want to implement. The more detail you give — flow, constraints, edge cases — the fewer follow-up questions I'll need."
 
@@ -51,7 +53,12 @@ Log the brief to `.specsmiths/<n>.questions.md` under a `## Brief` section.
 
 #### Step 1.5: Brief Quality Gate
 
-Before spending analysis time, check if the brief is too thin to work with. If it's under ~20 words or lacks any concrete detail about desired behavior (e.g. "make a button", "add caching", "fix the thing"), don't proceed to analysis. Instead, prompt the user to expand:
+Before spending analysis time, check if the brief has enough substance. A good brief should:
+- Mention a **specific behavior or outcome** ("users can reset their password" not just "improve auth")
+- Hint at **what triggers it or what problem it solves**
+- Be more than a single vague phrase
+
+If it fails these checks (e.g. "make a button", "add caching", "fix the thing"), prompt the user to expand:
 
 "That's a bit thin for me to analyze — could you expand on what this should do? For example: what triggers it, what the expected behavior is, or what problem it solves."
 
@@ -59,7 +66,7 @@ Only proceed to Step 2 once the brief contains enough substance to meaningfully 
 
 #### Step 2: Think, Then Clarify If Needed
 
-After receiving the brief, **think carefully** about what the user described. Analyze it against these dimensions:
+After receiving the brief, **analyze it methodically** against these dimensions:
 
 - **Functional requirements:** Is the flow clear? Inputs/outputs? Triggers? What "done" looks like?
 - **Edge cases & failure modes:** Missing/malformed input? Concurrency? Upstream failures? Partial failures? Retries?
@@ -121,7 +128,7 @@ Log everything to `.specsmiths/<n>.questions.md`:
 - <Anything still unresolved>
 ```
 
-Note: Round sections are only added if clarification was needed. If the brief was comprehensive enough, the log may only contain the Brief and Decisions sections.
+Note: Round sections are only added if clarification was needed. If the brief was comprehensive enough, the log may only contain the Brief and Decisions Made sections. If the brief was rejected by the quality gate, log the original brief and the expanded version the user provided.
 
 #### Discovery "Done" Criteria
 
@@ -149,7 +156,7 @@ Only proceed to Phase 2 when:
 
 Now that requirements are understood, spawn subagents to research how to build this. Adapt the number and focus of subagents based on what you learned in discovery.
 
-**Lightweight research escape hatch:** If the feature is narrowly scoped (single file, well-understood area, no new dependencies) AND the user explicitly says something like "I know the codebase, skip the deep research" or "keep it light", limit research to a single codebase analysis subagent only — skip web research, best practices, and library docs agents. Note this in `.specsmiths/<n>.research.md` under a `## Research Scope` section as "Lightweight — codebase analysis only (user-requested)."
+**Lightweight research escape hatch:** If the feature touches only 1-2 files, uses only existing dependencies, and the user explicitly says something like "I know this area, skip the deep research" or "keep it light", limit research to a single codebase analysis subagent only — skip web research, best practices, and library docs agents. Don't offer this proactively — only honor it when the user requests it. Note this in `.specsmiths/<n>.research.md` under a `## Research Scope` section as "Lightweight — codebase analysis only (user-requested)."
 
 #### Grimoire Integration (preferred)
 
@@ -266,7 +273,7 @@ For each decision point:
 
 ### Phase 3: Spec Creation
 
-Using the discovery answers AND research findings, write the full specification to `.specsmiths/<n>.md`.
+Using the discovery findings (brief + any interview Q&A) AND research findings, write the full specification to `.specsmiths/<n>.md`.
 
 This is the actual deliverable. It must be detailed enough that someone could implement it without asking any follow-up questions.
 

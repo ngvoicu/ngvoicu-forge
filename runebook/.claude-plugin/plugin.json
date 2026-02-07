@@ -1,6 +1,6 @@
 {
   "name": "runebook",
-  "description": "Living documentation for how your application works. Maintains structured docs for endpoints, jobs, flows, services, and integrations — always in sync with code.",
+  "description": "Living documentation for how your application works. Maintains structured docs for endpoints, jobs, flows, services, integrations, pages, components, hooks, and system guides — always in sync with code.",
   "version": "1.0.0",
   "author": {
     "name": "Gabriel Voicu"

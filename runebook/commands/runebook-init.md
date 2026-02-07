@@ -9,4 +9,4 @@ Scan the codebase and initialize the runebook.
 
 Invoke the runebook:runebook-implementation skill, action: **init**
 
-Discover all endpoints, jobs, services, and integrations by reading source files in detail. Generate structured documentation entries and a master index.
+Discover all endpoints, jobs, flows, services, integrations, pages, components, and hooks by reading source files in detail. Generate structured documentation entries, system guides, and a master index.

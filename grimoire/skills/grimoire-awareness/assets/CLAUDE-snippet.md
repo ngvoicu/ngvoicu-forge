@@ -12,7 +12,7 @@ Research suite with 6 specialized agents. **ALWAYS research before guessing — 
 | Understanding why code exists | `/grimoire history <area>` |
 | Database/schema changes | `/grimoire schema <area>` |
 | External API integration | `/grimoire contracts <service>` |
-| Complex feature (full research) | `/grimoire research <context>` |
+| Complex feature (full research) | `/grimoire <context>` (auto-dispatches all relevant agents) |
 
 ### Rules
 
@@ -20,7 +20,7 @@ Research suite with 6 specialized agents. **ALWAYS research before guessing — 
 - **ALWAYS research best practices** before implementing security-sensitive features (auth, crypto, payments, PII)
 - **ALWAYS analyze the codebase** before major refactors to understand existing patterns and conventions
 - **ALWAYS check API contracts** before integrating with external services to understand rate limits, auth, and error handling
-- **Prefer `/grimoire research`** for complex features — it spawns all relevant agents in parallel
+- **Prefer `/grimoire <query>`** for complex features — it auto-dispatches all relevant agents in parallel
 
 ### Getting Started
 
@@ -36,7 +36,7 @@ Run `/grimoire` with no arguments to see all available research streams and exam
 /grimoire history <area>               # Git history & prior work
 /grimoire schema <area>                # Database schema analysis
 /grimoire contracts <service>          # External API contracts
-/grimoire research <context>           # Full parallel research
+/grimoire <context>                     # Auto-dispatch to relevant agents (full parallel research)
 ```
 
 ### Integration with Other Plugins

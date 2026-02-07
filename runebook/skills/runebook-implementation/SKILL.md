@@ -75,7 +75,7 @@ Initialize the runebook by scanning the codebase and generating documentation en
      ```
 
 2. **Invoke the `runebook-scanner` agent** for a thorough codebase scan
-   - Use `Task` tool with `subagent_type: "general-purpose"`
+   - Use `Task` tool with `subagent_type: "runebook:runebook-scanner"` and `model: "sonnet"`
    - Provide the full scanner agent prompt from `runebook/agents/runebook-scanner.md`
    - Agent reads source files in detail — traces route handlers, reads cron definitions, follows service class methods, identifies external API calls
    - Wait for the agent to complete and read its findings
@@ -240,8 +240,13 @@ Update runebook entries after code changes.
 After updating component entries, check if any affected entries are referenced in a guide's `covers` frontmatter:
 
 1. Read guides that reference updated entries (check `covers` field in each `guides/*.md`)
-2. If a guide covers entries that changed materially (new behavior, new dependencies, new error scenarios), update the affected sections of the guide to reflect the new reality
-3. Preserve human-written sections (Gotchas & Tribal Knowledge, Common Tasks) — only update auto-derivable narrative sections (How It Works, Architecture at a Glance, Where Things Live)
+2. For each affected guide, read the updated entry's changelog to understand what changed, then decide which guide sections need updating:
+   - Happy path flow changed? → Update "How It Works" and "The Happy Path"
+   - New error scenarios or failure modes? → Update "What Can Go Wrong"
+   - Components added/removed from the domain? → Update "Architecture at a Glance"
+   - File paths changed? → Update "Where Things Live"
+   - None of the above (internal refactor, no behavior change)? → Skip guide update, only bump `updated` date
+3. **Never touch human sections**: Key Concepts, Common Tasks, Gotchas & Tribal Knowledge — these are preserved always
 4. Append to the guide's changelog: what changed and why
 5. If an update introduces a new component that doesn't fit any existing guide's domain, don't create a new guide automatically — note it: "New component `<name>` doesn't belong to any existing guide. Run `/runebook-init` to regenerate guides, or create one manually."
 
@@ -1086,5 +1091,9 @@ See the template in Action: init, step 4.
 - **Source files are the source of truth** — when code and docs disagree, code wins, docs get updated
 - **Flows need humans** — auto-detection finds components, but business flows require human knowledge
 - **Guides are narrative** — they explain how things work in plain language, not as component lists. Synthesize, don't enumerate. A good guide reads like a walkthrough written by a senior engineer onboarding a new teammate.
+  - ❌ Bad: "This domain includes endpoints/login, endpoints/logout, services/auth, and integrations/oauth."
+  - ✅ Good: "When a user logs in, they submit credentials to POST /login. The auth service validates the password and, if they chose social login, contacts Google's OAuth to verify identity. Both paths return a session token stored in a secure cookie."
+  - **Auto-derivable sections** (update from code): How It Works, The Happy Path, What Can Go Wrong, Architecture at a Glance, Where Things Live
+  - **Human sections** (preserve, never overwrite): Key Concepts, Common Tasks, Gotchas & Tribal Knowledge
 - **Commit `.runebook/` to git** — documentation must survive across sessions
 - **Tags enable discovery** — consistent tagging helps find related components across types

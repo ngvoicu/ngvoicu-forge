@@ -100,6 +100,14 @@ After ANY API change:
 - **404**: Not found — `{ "error": "not_found" }`
 - **429**: Rate limited — `{ "error": "rate_limit", "retry_after": 60 }`
 
+## Suggested Implementation
+<!-- Backend-generated suggestions based on endpoint patterns. Frontend can override in UI Guidelines. -->
+- **Endpoint type**: [create-form | edit-form | detail-view | list-view | delete-action | action-trigger]
+- **Suggested components**: [Infer from endpoint type — e.g. FormBuilder + TextField for POST, DataTable for paginated GET, ConfirmDialog for DELETE]
+- **Key interactions**: [What the user does — e.g. "fills form and submits", "scrolls through paginated list", "clicks delete and confirms"]
+- **Suggested states**: [Which states matter most — e.g. "loading during submit, validation errors inline, success redirect to detail page"]
+- **Watch out for**: [Non-obvious things from the API — e.g. "rate limited to 5 req/min", "response includes nested objects that need flattening", "file upload requires multipart"]
+
 ## UI Guidelines
 - **Layout**: Component/page structure
 - **Components**: Which reusable components to use (reference components.md)
@@ -116,6 +124,29 @@ After ANY API change:
 ```
 
 Remove sections that don't apply (e.g. no Path Parameters if the endpoint has none). Keep the template focused on what the frontend actually needs.
+
+### How to fill "Suggested Implementation"
+
+When creating or updating endpoint files, the backend populates the Suggested Implementation section based on endpoint patterns:
+
+| Endpoint Pattern | Type | Suggested Components | Key Interaction |
+|-----------------|------|---------------------|-----------------|
+| POST with body (no ID) | create-form | FormBuilder, TextField, SelectField | User fills form, submits, sees success/error |
+| PUT/PATCH with ID | edit-form | FormBuilder (pre-filled), TextField | User edits fields, submits changes |
+| GET with ID (single resource) | detail-view | DetailCard, Badge, ActionMenu | User views details, takes actions |
+| GET without ID (list/collection) | list-view | DataTable or CardGrid, Pagination, SearchBar | User browses, filters, paginates |
+| DELETE with ID | delete-action | ConfirmDialog, DangerButton | User clicks delete, confirms in modal |
+| POST (action, no resource creation) | action-trigger | Button, StatusIndicator | User triggers action, sees result |
+
+For "Watch out for", scan the endpoint's API details for non-obvious things the frontend should know:
+- Rate limits (`429` error response → mention the limit)
+- File uploads (multipart body → mention `FormData`)
+- Nested response objects (→ mention flattening needs)
+- Pagination (→ mention cursor vs offset, total count)
+- Long-running operations (→ mention polling or WebSocket)
+- Auth/permission requirements (→ mention role-based UI hiding)
+
+**This section is backend-generated, frontend-owned.** Backend fills it during sync based on endpoint analysis. Frontend can modify, expand, or override it freely in UI Guidelines.
 
 ## Validation
 
@@ -138,6 +169,8 @@ Use `/uispec-validate` as the command shortcut for running validation standalone
 3. Read existing files before modifying — preserve manual additions
 4. Keep specs focused on what frontend needs — don't duplicate backend implementation details
 5. Include a Changelog entry in endpoint files when updating
+6. Always populate the "Suggested Implementation" section based on endpoint patterns — it helps the frontend team get started faster
+7. The "Suggested Implementation" section is backend-generated but frontend-owned — frontend can override it freely
 
 ## CLAUDE.md Snippet
 

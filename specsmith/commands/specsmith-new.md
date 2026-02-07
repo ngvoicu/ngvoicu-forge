@@ -1,5 +1,5 @@
 ---
-description: "Create a new implementation spec through discovery interview and deep research. Usage: /specsmith-new <name>"
+description: "Create a new implementation spec through discovery interview and deep research. Usage: /specsmith-new <name>: <brief>"
 allowed-tools: Read, Edit, Write, Bash, Glob, Grep, LS, TodoRead, TodoWrite, Task, WebSearch, WebFetch, AskUserQuestion
 ---
 
@@ -11,10 +11,10 @@ Create a new implementation spec.
 
 Invoke the specsmith:specsmith-implementation skill, action: **new**
 
-The spec name is: `{{ARGS}}`
+The args are: `{{ARGS}}`
 
-If no name was provided, ask the user for a spec name first.
+**Default: one-shot (name + brief together).** If the args contain a colon (e.g. `/specsmith-new auth-refactor: Refactor the auth middleware to support JWT and session tokens`), split on the first colon — everything before it is the spec name, everything after is the initial brief. Skip asking for the feature explanation and go straight to the brief quality gate / analysis with the provided text.
 
-**One-shot support:** If the args contain a colon (e.g. `/specsmith-new auth-refactor: Refactor the auth middleware to support JWT and session tokens`), split on the first colon — everything before it is the spec name, everything after is the initial brief. Skip asking for the feature explanation and go straight to the brief quality gate / analysis with the provided text.
+If the args have no colon, treat the entire arg as the spec name and ask the user to explain the feature.
 
-Otherwise, once you have the name, immediately ask the user to explain the feature — do NOT start creating files or researching until they've described what they want to build.
+If no args were provided at all, ask the user for both a spec name and feature explanation — ideally in one prompt: "Give me a name and brief for this spec (e.g. `auth-refactor: Refactor the auth middleware to support JWT`)."

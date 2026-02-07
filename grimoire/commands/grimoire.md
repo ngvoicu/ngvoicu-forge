@@ -1,5 +1,5 @@
 ---
-description: "Research suite — invoke specialized agents for docs, best practices, codebase, history, schema, or API contracts. Usage: /grimoire <stream> <query> or /grimoire research <context>"
+description: "Research suite — auto-dispatches to specialized agents based on your query. Usage: /grimoire <query>"
 allowed-tools: Read, Edit, Write, Bash, Glob, Grep, LS, Task, WebSearch, WebFetch, AskUserQuestion
 ---
 
@@ -11,7 +11,9 @@ Invoke the grimoire:grimoire-research skill.
 
 Arguments: `{{ARGS}}`
 
-Parse the first word of `{{ARGS}}` as the stream name:
+**Default behavior: auto-dispatch.** Grimoire analyzes your query and picks the right agents automatically — codebase analysis, library docs, best practices, git history, DB schema, or API contracts. You don't need to specify which stream to use.
+
+If the first word of `{{ARGS}}` matches a known stream name, use that single stream for a quick focused lookup:
 
 | First word | Action | Stream |
 |------------|--------|--------|
@@ -21,8 +23,7 @@ Parse the first word of `{{ARGS}}` as the stream name:
 | `history` | lookup | grimoire-history |
 | `schema` | lookup | grimoire-schema |
 | `contracts` | lookup | grimoire-contracts |
-| `research` | research | all relevant agents |
 | *(empty)* | streams | show available streams |
-| *(other)* | research | treat entire input as context |
+| *(anything else)* | **research** | **auto-dispatch to relevant agents** |
 
 Pass the parsed action and remaining arguments to the skill.

@@ -7,46 +7,22 @@ description: "Proactive research awareness. Triggers on: 'look up docs for', 'ho
 
 ## Trigger Phrases
 
-Activate this skill when the user says anything matching these patterns:
+Activate this skill when the user says anything matching these patterns. **Default: use `/grimoire <query>` for auto-dispatch.** Grimoire picks the right agents based on the query. Only use a specific stream prefix when the user explicitly asks for a single stream.
 
-**Documentation requests:**
-- "look up docs for X", "how do I use X", "what's the API for X"
-- "check the docs for X", "find the docs for X"
-- "what version of X", "is X compatible with Y"
-- When any of these are detected, invoke `/grimoire docs <X>`
-
-**Best practices requests:**
-- "what's the best way to X", "best practices for X"
-- "how should I implement X", "is this the right approach for X"
-- "find best practices for X", "common mistakes with X"
-- When any of these are detected, invoke `/grimoire practices <X>`
-
-**Codebase analysis requests:**
-- "how does our X work", "where is X implemented"
-- "what pattern do we use for X", "find similar code to X"
-- "what files would I need to change for X"
-- When any of these are detected, invoke `/grimoire codebase <X>`
-
-**History requests:**
-- "why is X like this", "who changed X", "when was X added"
-- "has anyone tried X before", "what happened with X"
-- "check git history for X"
-- When any of these are detected, invoke `/grimoire history <X>`
-
-**Schema requests:**
-- "what's the schema for X", "how is X stored in the database"
-- "what tables are related to X", "check the migrations for X"
-- When any of these are detected, invoke `/grimoire schema <X>`
-
-**API contract requests:**
-- "what does the X API look like", "check the X API docs"
-- "what are the rate limits for X", "how does X auth work"
-- When any of these are detected, invoke `/grimoire contracts <X>`
-
-**Full research requests:**
+**Research and understanding requests (auto-dispatch):**
 - "research this", "research X", "investigate X"
 - "I need to understand X before building"
-- When any of these are detected, invoke `/grimoire research <X>`
+- "what's the best way to X", "best practices for X"
+- "how should I implement X", "is this the right approach for X"
+- "how does our X work", "where is X implemented"
+- "why is X like this", "has anyone tried X before"
+- When any of these are detected, invoke `/grimoire <query>` — let auto-dispatch pick the agents
+
+**Explicit single-stream requests (use the stream prefix):**
+- "look up docs for X", "check the docs for X" → `/grimoire docs <X>`
+- "check git history for X", "who changed X" → `/grimoire history <X>`
+- "what's the schema for X", "check the migrations" → `/grimoire schema <X>`
+- "check the X API docs", "what are the rate limits" → `/grimoire contracts <X>`
 
 ## Proactive Triggers
 
@@ -67,17 +43,17 @@ If a `package.json`, `requirements.txt`, `Cargo.toml`, `go.mod`, or similar file
 ### When implementing security-sensitive features (suggest)
 
 If the implementation involves authentication, authorization, cryptography, payment processing, PII handling, or input validation:
-- Suggest: "This is security-sensitive — want me to research best practices first? `/grimoire practices <topic>`"
+- Suggest: "This is security-sensitive — want me to research first? `/grimoire <topic>`"
 
 ### Before major refactors (suggest)
 
 If the user is about to restructure significant portions of the codebase:
-- Suggest: "Before refactoring, want me to analyze the current patterns? `/grimoire codebase <area>`"
+- Suggest: "Before refactoring, want me to research this area? `/grimoire <area>`"
 
 ### When debugging mysterious behavior (suggest)
 
 If the user is confused about why something works a certain way:
-- Suggest: "Want me to check the git history to understand why? `/grimoire history <area>`"
+- Suggest: "Want me to research why this works this way? `/grimoire <area>`"
 
 ## Integration with Other Plugins
 
