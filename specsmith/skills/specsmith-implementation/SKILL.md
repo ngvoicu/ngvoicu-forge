@@ -1,6 +1,7 @@
 ---
 name: specsmith-implementation
 description: "Core implementation logic for specsmith commands. Do not invoke directly - use the /specsmith-* commands instead."
+user-invocable: false
 ---
 
 # Spec Smith Implementation

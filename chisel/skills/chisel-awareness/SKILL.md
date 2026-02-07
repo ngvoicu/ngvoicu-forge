@@ -1,6 +1,7 @@
 ---
 name: chisel-awareness
 description: "Proactive awareness for surgical code edits. Triggers on: 'rename X to Y', 'move X to Y', 'replace X with Y', 'change all X to Y', 'update the color', 'fix the import', 'change the font', or when renaming/moving files manually without updating references. Auto-invokes chisel for explicit rename/move/replace requests. Suggests chisel for ambiguous edits."
+user-invocable: false
 ---
 
 # Chisel Awareness

@@ -1,6 +1,7 @@
 ---
 name: runebook-implementation
 description: "Core implementation logic for runebook commands. Do not invoke directly — use the /runebook-* commands instead."
+user-invocable: false
 ---
 
 # Runebook Implementation

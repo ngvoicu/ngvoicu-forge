@@ -1,6 +1,7 @@
 ---
 name: specsmith-management
 description: "Awareness of the .specsmiths/ directory for multi-spec workflows. Triggers on: 'the plan', 'the spec', 'my plans', 'switch to', 'go back to', 'resume', 'continue where we left off', 'what was I working on', 'show my plans', 'where am I', 'actually let's change', 'we also need', 'I realized we should', 'implement the spec', 'let's build this', 'start implementation', 'execute the plan', or when a .specsmiths/ directory exists. Also triggers when the user describes a feature requiring changes to more than 2 files."
+user-invocable: false
 ---
 
 # Plan Management Awareness

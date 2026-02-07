@@ -1,6 +1,7 @@
 ---
 name: grimoire-research
 description: "Research orchestration — picks agents, runs parallel research, synthesizes findings. Actions: research (full parallel), lookup (single stream), streams (list available). Triggers on: 'research this', 'look up docs for', 'find best practices', 'analyze the codebase', 'check git history', 'analyze the schema', 'check the API docs', or when invoked via /grimoire command."
+user-invocable: false
 ---
 
 # Grimoire Research

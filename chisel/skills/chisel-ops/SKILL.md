@@ -1,6 +1,7 @@
 ---
 name: chisel-ops
 description: "Core dispatch logic for chisel operations. Parses operation type, spawns the chisel agent, returns change summary. Actions: execute (perform edit), help (show operations). Triggers on: 'rename X to Y', 'move X to Y', 'replace X with Y', 'change the color', 'update the font', 'fix all references', or when invoked via /chisel command."
+user-invocable: false
 ---
 
 # Chisel Operations

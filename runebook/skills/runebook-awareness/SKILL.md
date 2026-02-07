@@ -1,6 +1,7 @@
 ---
 name: runebook-awareness
 description: "Assertive awareness of the .runebook/ directory for living documentation. Triggers on: 'how does X work', 'what does this endpoint do', 'what does this service do', 'what does this job do', 'what does this integration do', 'what does this page do', 'what props does X accept', 'what does this hook do', 'check the runebook', 'document this', 'update the docs', 'explain the X system', 'give me an overview of X', 'walk me through X', 'how do these pieces fit together', or when a .runebook/ directory exists and code changes are made. Automatically reads relevant entries and guides before work and updates them after changes — no prompting."
+user-invocable: false
 ---
 
 # Runebook Awareness

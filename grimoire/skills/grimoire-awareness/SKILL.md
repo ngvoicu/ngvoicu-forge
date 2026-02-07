@@ -1,6 +1,7 @@
 ---
 name: grimoire-awareness
 description: "Proactive research awareness. Triggers on: 'look up docs for', 'how do I use X library', 'what's the best way to', 'research this', 'find best practices for', 'check the docs', or when adding new dependencies, using unfamiliar library APIs, or implementing security-sensitive features. Suggests or auto-invokes grimoire research when guessing would be dangerous."
+user-invocable: false
 ---
 
 # Grimoire Awareness
